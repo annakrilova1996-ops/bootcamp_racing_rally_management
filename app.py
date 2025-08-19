@@ -24,7 +24,6 @@ def get_snowflake_connection():
             user=st.secrets["snowflake"]["user"],
             password=st.secrets["snowflake"]["password"],
             account=st.secrets["snowflake"]["account"],
-            region=st.secrets["snowflake"]["region"], # New parameter for region
             warehouse=st.secrets["snowflake"]["warehouse"],
             database=st.secrets["snowflake"]["database"]
         )
