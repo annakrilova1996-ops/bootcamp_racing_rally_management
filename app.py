@@ -27,9 +27,6 @@ def get_snowflake_connection():
             "warehouse": st.secrets["snowflake"]["warehouse"],
             "database": st.secrets["snowflake"]["database"]
         }
-        
-        # Add the region parameter, as it's now required
-        conn_params["region"] = st.secrets["snowflake"]["region"]
 
         conn = snowflake.connector.connect(**conn_params)
         return conn
