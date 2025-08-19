@@ -24,6 +24,7 @@ def get_snowflake_connection():
             user=st.secrets["snowflake"]["user"],
             password=st.secrets["snowflake"]["password"],
             account=st.secrets["snowflake"]["account"],
+            region=st.secrets["snowflake"]["region"], # New parameter for region
             warehouse=st.secrets["snowflake"]["warehouse"],
             database=st.secrets["snowflake"]["database"]
         )
@@ -174,7 +175,7 @@ if st.button("🏁 Start Race", use_container_width=True, type="primary"):
         # Display results and celebration effects
         st.dataframe(results_df.drop('Team ID', axis=1), use_container_width=True)
         st.balloons()
-        st.success(f"🎉 Team **{winner_team_name}** wins the race! �")
+        st.success(f"🎉 Team **{winner_team_name}** wins the race! 🎉")
 
         st.subheader("Updated Team Budgets")
         st.cache_data.clear() # Clear cache to force data reload
