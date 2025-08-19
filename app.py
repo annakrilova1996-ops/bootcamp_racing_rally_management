@@ -20,13 +20,19 @@ st.write("Welcome to the simulator! Enter team and car data to get started.")
 def get_snowflake_connection():
     """Establishes and caches a connection to Snowflake using st.secrets."""
     try:
-        conn = snowflake.connector.connect(
-            user=st.secrets["snowflake"]["user"],
-            password=st.secrets["snowflake"]["password"],
-            account=st.secrets["snowflake"]["account"],
-            warehouse=st.secrets["snowflake"]["warehouse"],
-            database=st.secrets["snowflake"]["database"]
-        )
+        conn_params = {
+            "user": st.secrets["snowflake"]["user"],
+            "password": st.secrets["snowflake"]["password"],
+            "account": st.secrets["snowflake"]["account"],
+            "warehouse": st.secrets["snowflake"]["warehouse"],
+            "database": st.secrets["snowflake"]["database"]
+        }
+        
+        # Check if region is provided and not empty
+        if "region" in st.secrets["snowflake"] and st.secrets["snowflake"]["region"]:
+            conn_params["region"] = st.secrets["snowflake"]["region"]
+
+        conn = snowflake.connector.connect(**conn_params)
         return conn
     except Exception as e:
         st.error(f"Failed to connect to Snowflake. Please check your credentials in secrets.toml: {e}")
