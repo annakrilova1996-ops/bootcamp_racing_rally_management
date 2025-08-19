@@ -25,8 +25,7 @@ def get_snowflake_connection():
             password=st.secrets["snowflake"]["password"],
             account=st.secrets["snowflake"]["account"],
             warehouse=st.secrets["snowflake"]["warehouse"],
-            database=st.secrets["snowflake"]["database"],
-            schema=st.secrets["snowflake"]["schema"]
+            database=st.secrets["snowflake"]["database"]
         )
         return conn
     except Exception as e:
