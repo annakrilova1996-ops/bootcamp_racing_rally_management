@@ -91,7 +91,10 @@ with st.container(border=True):
         handling = st.slider("Handling", 1.0, 10.0, 5.0)
 
     # Get the list of available teams for the dropdown from the loaded DataFrame
-    team_list = teams_df['TEAM_NAME'].unique()
+    team_list = []
+    if not teams_df.empty:
+        team_list = teams_df['TEAM_NAME'].unique()
+    
     if len(team_list) > 0:
         assigned_team = st.selectbox("Assign to Team", team_list)
         # Button to add the new car to the Snowflake table
@@ -171,7 +174,7 @@ if st.button("🏁 Start Race", use_container_width=True, type="primary"):
         # Display results and celebration effects
         st.dataframe(results_df.drop('Team ID', axis=1), use_container_width=True)
         st.balloons()
-        st.success(f"🎉 Team **{winner_team_name}** wins the race! 🎉")
+        st.success(f"🎉 Team **{winner_team_name}** wins the race! �")
 
         st.subheader("Updated Team Budgets")
         st.cache_data.clear() # Clear cache to force data reload
