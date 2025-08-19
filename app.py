@@ -28,9 +28,8 @@ def get_snowflake_connection():
             "database": st.secrets["snowflake"]["database"]
         }
         
-        # Check if region is provided and not empty
-        if "region" in st.secrets["snowflake"] and st.secrets["snowflake"]["region"]:
-            conn_params["region"] = st.secrets["snowflake"]["region"]
+        # Add the region parameter, as it's now required
+        conn_params["region"] = st.secrets["snowflake"]["region"]
 
         conn = snowflake.connector.connect(**conn_params)
         return conn
